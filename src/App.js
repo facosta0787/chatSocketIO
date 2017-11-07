@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import Chat from './components/Chat';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <h1>Hola Mundo !</h1>
+        <Chat/>
       </div>
     );
   }
