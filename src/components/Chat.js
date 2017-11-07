@@ -15,11 +15,11 @@ class Chat extends React.Component{
         addMessage(data)
       })
 
-    }
+      addMessage = (data) =>{
+        console.log(data)
+        this.setState({ messages: [...this.state.messages,data] })
+      }
 
-    addMessage = () =>{
-      console.log(data)
-      this.setState({ messages: [...this.state.messages,data] })
     }
 
     sendMessage = e =>{
