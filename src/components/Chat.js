@@ -10,16 +10,18 @@ class Chat extends React.Component{
         message:'',
         messages:[]
       };
+
       this.socket = io('localhost:8080')
+
       this.socket.on('RECEIVE_MESSAGE',(data) => {
-        addMessage(data)
+        this.addMessage(data)
       })
 
-      addMessage = (data) =>{
-        console.log(data)
-        this.setState({ messages: [...this.state.messages,data] })
-      }
+    }
 
+    addMessage = (data) =>{
+      console.log(data)
+      this.setState({ messages: [...this.state.messages,data] })
     }
 
     sendMessage = e =>{
@@ -54,9 +56,9 @@ class Chat extends React.Component{
                                 </div>
                             </div>
                             <div className="card-footer">
-                                    <input type="text" placeholder="User" className="form-control"/>
+                                    <input type="text" placeholder="User" value={this.state.username} onChange={ev => this.setState({username: ev.target.value})} className="form-control"/>
                                     <br/>
-                                    <input type="text" placeholder="Message" className="form-control"/>
+                                    <input type="text" placeholder="Message" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})} className="form-control"/>
                                     <br/>
                                     <button onClick={this.sendMessage}  className="btn btn-primary form-control">Send</button>
                             </div>
