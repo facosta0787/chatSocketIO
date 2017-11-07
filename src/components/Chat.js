@@ -6,12 +6,12 @@ class Chat extends React.Component{
     constructor(props) {
       super(props);
       this.state = {
-        username:'',
+        author:'',
         message:'',
         messages:[]
       };
 
-      this.socket = io('localhost:8080')
+      this.socket = io('12.1.1.196:8080')
 
       this.socket.on('RECEIVE_MESSAGE',(data) => {
         this.addMessage(data)
@@ -29,7 +29,7 @@ class Chat extends React.Component{
       this.socket.emit(
         'SEND_MESSASGE',
         {
-          author:this.state.username,
+          author:this.state.author,
           message: this.state.message
         }
       )
@@ -47,16 +47,16 @@ class Chat extends React.Component{
                                 <hr/>
                                 <div className="messages">
                                   {
-                                    this.state.messages.map( message => {
+                                    this.state.messages.map( (message,idx) => {
                                         return(
-                                          <div>{message.autor}: {message.message}</div>
+                                          <div key={idx}>{message.author}: {message.message}</div>
                                         )
                                     })
                                   }
                                 </div>
                             </div>
                             <div className="card-footer">
-                                    <input type="text" placeholder="User" value={this.state.username} onChange={ev => this.setState({username: ev.target.value})} className="form-control"/>
+                                    <input type="text" placeholder="User" value={this.state.author} onChange={ev => this.setState({author: ev.target.value})} className="form-control"/>
                                     <br/>
                                     <input type="text" placeholder="Message" value={this.state.message} onChange={ev => this.setState({message: ev.target.value})} className="form-control"/>
                                     <br/>
